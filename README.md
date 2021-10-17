@@ -1,8 +1,14 @@
-## sbt project compiled with Scala 3
+## Me, playing around with Scala 3
+
+I'm trying to use as many fancy keywords that I can. Here it is what I've gotten so far:
+
+A purely functional asynchronous streamed real time websocket communication discord bot using scala 3, cats and fs2.
 
 ### Usage
 
-This is a normal sbt project. You can compile code with `sbt compile`, run it with `sbt run`, and `sbt console` will start a Scala 3 REPL.
+At project root, run:
+``` sh
+sbt runWithProxy
+```
 
-For more information on the sbt-dotty plugin, see the
-[scala3-example-project](https://github.com/scala/scala3-example-project/blob/main/README.md).
+It needs docker installed and port 8020 opened.
