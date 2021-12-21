@@ -3,15 +3,15 @@ import sbt._
 object Dependencies {
 
     // Versions
-    lazy val catsVersion = "2.6.1"
-    lazy val catsEffectVersion = "3.1.1"
-    lazy val sttpClientVersion = "3.3.11"
+    lazy val catsVersion = "2.7.0"
+    lazy val catsEffectVersion = "3.3.1"
+    lazy val sttpClientVersion = "3.3.18"
     lazy val circeVersion = "0.14.1"
     lazy val scalaLoggingVersion = "3.9.4"
     lazy val logBackVersion = "1.2.5"
     lazy val munitVersion = "0.7.27"
     lazy val scoptVersion = "4.0.1"
-    lazy val specs2Version = "5.0.0-RC-03"
+    lazy val specs2Version = "5.0.0-RC-22"
 
     // Libraries
     val catsCore = "org.typelevel" %% "cats-core" % catsVersion
