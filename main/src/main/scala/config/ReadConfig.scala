@@ -2,24 +2,20 @@ package main.config
 
 import cats.effect.IO
 import discord.model.DiscordHostInfo
-import main.model.{RawConfig, merge}
+import main.model.RawConfig
 import bot.model.BotConfig
+import cfg.read
 
 def readConfig(cmdLineArgs: List[String]): IO[BotConfig] =
     for
-        cmdLineCfg <- readConfigurationFromCmdLine(cmdLineArgs)
-
-        cfgFilePath = cmdLineCfg.configPath.getOrElse(Defaults.configFilePath)
-        fileCfg <- readConfigFromFile(cfgFilePath)
-
-        rawConfig = cmdLineCfg.config.merge(fileCfg)
+        rawConfig <- cfgStructure.read(cmdLineArgs, RawConfig())
         finalConfig <- map(rawConfig).toIO()
     yield
         finalConfig
 
 extension [A] (x: Either[String, A])
 
-    def toIO() = x match {
+    private def toIO() = x match {
         case Left(msg) => IO.raiseError(Exception(msg))
         case Right(obj) => IO.pure(obj)
     }

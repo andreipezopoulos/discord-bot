@@ -31,9 +31,11 @@ object Dependencies {
     // Dep list
     val discordDeps = Seq(sttpCore, sttpFs2, circeCore, circeGeneric, circeParser)
 
+    val cfgManager = Seq(scopt, circeYaml)
+
     val botDeps = Seq(sttpCore, sttpFs2)
 
-    val mainDeps = Seq(scopt, circeYaml)
+    val mainDeps = Seq()
 
     val commonDeps = Seq(catsCore, catsEffect, logBack, scalaLogging, specs2 % Test, specs2extra % Test)
 

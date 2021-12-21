@@ -9,6 +9,14 @@ lazy val commonSettings = Seq(
   libraryDependencies ++= Dependencies.commonDeps,
 )
 
+lazy val cfgManager = (project in file("cfg-manager"))
+  .settings(
+    name := "cfg-manager",
+    version := "0.0.1",
+    commonSettings,
+    libraryDependencies ++= Dependencies.cfgManager
+)
+
 lazy val discordLib = (project in file("discord-lib"))
   .settings(
     name := "discord-lib",
@@ -29,7 +37,7 @@ lazy val bot = (project in file("bot"))
 lazy val proxyArgs = " -u localhost -p 8020"
 
 lazy val main = (project in file("main"))
-  .dependsOn(discordLib, bot)
+  .dependsOn(discordLib, bot, cfgManager)
   .settings(
     name := "discord-bot",
     version := "0.0.1",
