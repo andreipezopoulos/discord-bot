@@ -60,7 +60,7 @@ extension [T] (struct: CfgStructure[T])
                     builder.opt[String](char, opt.ext.buildForCmdLine)
                         .text(opt._help.getOrElse(""))
                         .validate(validateFuncToScopt(opt, _, exampleObj, builder))
-                        .action((v, obj) => parseAndAlter(opt, v, obj))
+                        .action((v, obj) => parseAndAlterFromValue(opt, v, obj))
 
                 acc ++ OParser.sequence(scoptOpt)
             }
@@ -115,7 +115,7 @@ private def validateFuncToScopt[T](opt: Opt[T], value: String, obj: T, builder: 
         )
         .getOrElse(builder.success)
 
-private def parseAndAlter[T](opt: Opt[T], value: String, obj: T) =
+private def parseAndAlterFromValue[T](opt: Opt[T], value: String, obj: T) =
     opt._parser
         .map(_.parseAndAlter(obj, value).fold({ ex => throw ex}, { x => x}))
         .getOrElse(obj)

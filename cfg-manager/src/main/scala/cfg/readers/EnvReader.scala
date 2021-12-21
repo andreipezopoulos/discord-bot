@@ -19,11 +19,11 @@ extension [T] (struct: CfgStructure[T])
             listOfEnvValueAndOpt
                 .foldLeft[Either[Throwable, T]](Right(obj)) { (acc, valueAndOpt) =>
                     val (maybeValue: Option[String], opt: Opt[T]) = valueAndOpt
-                    opt._parser.map(parseAndAlter(maybeValue, _, obj)).getOrElse(acc)
+                    opt._parser.map(parseAndAlterFromEnv(maybeValue, _, obj)).getOrElse(acc)
                 }
     }
 
-private def parseAndAlter[T](maybeValue: Option[String], parser: OptParser[T], obj: T) =
+private def parseAndAlterFromEnv[T](maybeValue: Option[String], parser: OptParser[T], obj: T) =
     maybeValue.map(parser.parseAndAlter(obj, _)).getOrElse(Right(obj))
 
 private def getEnv(name: String) = IO { Option(System.getenv(name)) }

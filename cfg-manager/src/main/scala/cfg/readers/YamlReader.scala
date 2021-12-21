@@ -16,7 +16,7 @@ extension [T] (struct: CfgStructure[T])
                 .opts
                 .filter(_.readFrom.file)
                 .foldLeft[Either[Throwable, T]](Right(obj)) { (acc, o) =>
-                    acc.flatMap(parseAndAlter(_, findField(o.ext, cursorAtRootElem), o))
+                    acc.flatMap(parseAndAlterFromCursor(_, findField(o.ext, cursorAtRootElem), o))
                 }
                 .changeExceptionAndConcatOnErrorMessage(s"While reading file [$filePath]: ")
     }
@@ -50,7 +50,7 @@ private def readFile(fileName: String) = IO {
     Source.fromFile(fileName).getLines.mkString("\n")
 }
 
-private def parseAndAlter[T](obj: T, cursor: ACursor, opt: Opt[T]) =
+private def parseAndAlterFromCursor[T](obj: T, cursor: ACursor, opt: Opt[T]) =
     if (cursor.failed)
         Right(obj)
     else
